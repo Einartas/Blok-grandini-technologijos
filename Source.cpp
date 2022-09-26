@@ -37,39 +37,40 @@ int main()
 
 	for (auto& line : data)
 	{
-		text << line;
+		text << line; // nusiskaitom eilute is failo
 	}
 	
 	cout << "Pradinis tekstas: " << text.str() << endl;
 
 	string s = text.str();
 
-	cout << "Ascii kodas: ";
-	for (int i = 0; i < s.length(); i++)
+	for (int i = 0; i < s.length(); i++) // paverciam inputa i ascii
 	{
-		cout << (int)s[i];
 		asc << (int)s[i];
 	}
-	
-	string a = asc.str();
 
-	for (int i = 0; i < a.length() - 1; i++)
+	string a = asc.str();
+	int n = 0;
+
+	for (int i = 0; i < a.length() - 1; i++) // atliekam ivairius veiksmus skaiciams pakeisti
 	{
-		if (a[i] < 50) a[i + 1] = a[i + 1] + 23;
-		else if (a[i] > 50) a[i + 1] = a[i + 1] - 23;
+		a[i] += i * 7;
+		if (a[i] > 100) a[i + 1] -= 33;
+		else a[i + 1] += 28 * i / 2;
+		if (a[i] < 0) a[i] *= -1;
+
+		n++;
+		for (int j = 0; j < n; j++)
+		{
+			a[j] = a[j] * a[i + 1];
+			if (a[j] < 0) a[j] *= -1; 
+		}
+
 		ch << a[i];
 	}
 	ch << a[a.length()];
 
-	cout << endl << "Po keitimo: " << ch.str() << endl;
-
 	string p = ch.str();
-	
-	cout << "Ascii po keitimo: ";
-	for (int i = 0; i < p.length(); i++)
-	{
-		cout << (int)p[i];
-	}
 
 	cout << endl << "Hex'as: ";
 	for (int i = 0; i < p.length(); i++)
@@ -77,8 +78,5 @@ int main()
 		cout << hex << (int)p[i];
 	}
 
-	for (int i = 0; i < 10; i++)
-	{
-		cout << endl;
-	}
+	cout << endl;
 }
