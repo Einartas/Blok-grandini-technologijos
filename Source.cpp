@@ -33,50 +33,32 @@ int main()
 	ifstream input("input.txt");
 	bool result = file("input.txt", data);
 
-	stringstream text, asc, ch;
+	stringstream text;
+	string base;
+
+	base = "E145FF0BE9199C41D2FC0142ABC96B3D7E01D171CB2CC8DCD423CA8D71B52F37";
 
 	for (auto& line : data)
 	{
-		text << line; // nusiskaitom eilute is failo
+		text << line; 
 	}
 	
 	cout << "Pradinis tekstas: " << text.str() << endl;
 
 	string s = text.str();
+	int temp = 0;
 
-	for (int i = 0; i < s.length(); i++) // paverciam inputa i ascii
+	for (int i = 0; i < 64; i++)
 	{
-		asc << (int)s[i];
-	}
-
-	string a = asc.str();
-	int n = 0;
-
-	for (int i = 0; i < a.length() - 1; i++) // atliekam ivairius veiksmus skaiciams pakeisti
-	{
-		a[i] += i * 7;
-		if (a[i] > 100) a[i + 1] -= 33;
-		else a[i + 1] += 28 * i / 2;
-		if (a[i] < 0) a[i] *= -1;
-
-		n++;
-		for (int j = 0; j < n; j++)
+		for (int j = 0; j < s.size(); j++)
 		{
-			a[j] = a[j] * a[i + 1];
-			if (a[j] < 0) a[j] *= -1; 
+			temp = int(base[i]);
+			if (temp > 100) temp -= int(s[j]);
+			else temp += int(s[j]);
+			base[i] = char(temp);
 		}
 
-		ch << a[i];
-	}
-	ch << a[a.length()];
-
-	string p = ch.str();
-
-	cout << endl << "Hex'as: ";
-	for (int i = 0; i < p.length(); i++)
-	{
-		cout << hex << (int)p[i];
 	}
 
-	cout << endl;
+	cout << endl << "after: " << base << endl;
 }
