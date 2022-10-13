@@ -6,17 +6,30 @@ Programa skirta suhashuoti įvairaus ilgio tekstą ar simbolių kratinį.
 ## Pseudokodas
 
 hashing(){
+
   for(i=1; i<64; i++) {
+  
     for(j=0; j<text.size(); j++) {
+    
     temporary = int(seed_symbol[i]);
+    
     temporary = temporary ^ int(text_symbol[j]);
+    
     seed_symbol[i] = char(temporary);
+    
     seed_symbol[i-1] = seed_symbol[i-1] + (i ^ j);
+    
     }
+    
    seed_symbol[i] = int(seed_symbol[i]) + int(seed_symbol[64 - i]);
+   
    }
+   
    hash = string_to_hex(seed);
+   
    hash.resize(64);
+   
+   }
 
 ## Bandymas su failais
 
